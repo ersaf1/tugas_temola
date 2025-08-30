@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Akun - MySite</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  body {background:#E3EED4;color:#000;font-family: 'Inter', sans-serif;} /* teks hitam light mode */
+  body.dark-mode {background:#0F2A1D !important;color:#fff !important;} /* teks putih dark mode */
+  body.dark-mode .navbar {background:#091911 !important;}
+  body.dark-mode .navbar-brand, body.dark-mode .nav-link {color:#E3EED4 !important;}
+  body.dark-mode .sidebar {background:linear-gradient(180deg,#152a20 0%,#091911 100%) !important;color:#E3EED4;}
+  body.dark-mode .sidebar .nav-link {color:#E3EED4 !important;}
+  body.dark-mode .sidebar .nav-link:after {background:#FFD857;}
+  body.dark-mode .active-page {background:#264c38!important;color:#E3EED4!important;}
+  body.dark-mode .card {background:#102f20;color:#E3EED4;}
+  body.dark-mode .card-header {background:#264c38;color:#E3EED4;}
+  body.dark-mode .form-control {background:#203b2b;color:#E3EED4;border-color:#34543a;}
+  body.dark-mode .btn-primary {background:#264c38!important;border-color:#34543a!important;}
+  .navbar {background:#0F2A1D!important;}
+  .app-navbar {background:linear-gradient(135deg,#0F2A1D 0%,#2e6a46 55%,#0F2A1D 100%) !important;box-shadow:0 4px 12px -4px rgba(0,0,0,.45);position:relative;}
+  .app-navbar:after {content:'';position:absolute;left:0;bottom:0;width:100%;height:3px;background:linear-gradient(90deg,#FFD857,#6B9071,#FFD857);opacity:.85;}
+  .app-navbar .navbar-brand {font-weight:700;letter-spacing:1px;display:flex;align-items:center;gap:.35rem;}
+  .navbar-brand .brand-strong {color:#FFD857;}
+  .navbar-brand .brand-accent {color:#E3EED4;}
+  .app-navbar .nav-link {position:relative;padding:.55rem .9rem;border-radius:.75rem;transition:color .25s, background .25s;}
+  .app-navbar .nav-link:after {content:'';position:absolute;left:50%;bottom:4px;width:0;height:2px;background:#FFD857;transition:width .3s;transform:translateX(-50%);} 
+  .app-navbar .nav-link:hover:after, .app-navbar .nav-link.active:after {width:55%;}
+  .app-navbar .nav-link.active, .app-navbar .nav-link:focus {background:rgba(255,216,87,.08);}
+  .app-navbar .navbar-toggler {border-color:rgba(255,216,87,.6);} 
+  .app-navbar .navbar-toggler:focus {box-shadow:0 0 0 .15rem rgba(255,216,87,.35);} 
+  body.dark-mode .app-navbar {background:linear-gradient(135deg,#091911 0%,#153324 55%,#091911 100%) !important;}
+  body.dark-mode .app-navbar:after {background:linear-gradient(90deg,#6fbf92,#FFD857,#6fbf92);} 
+  body.dark-mode .navbar-brand .brand-strong {color:#6fbf92;} 
+  body.dark-mode .navbar-brand .brand-accent {color:#fff;} 
+  .navbar-brand,.navbar-nav .nav-link {color:#E3EED4!important;}
+  .navbar-brand {font-family:'Poppins',sans-serif;font-weight:600;letter-spacing:.6px;text-transform:uppercase;}
+  .sidebar {background:linear-gradient(180deg,#375534 0%,#0F2A1D 100%);color:#000;min-height:100vh;padding:1.2rem 1rem;}
+  .sidebar h5 {font-family:'Poppins',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.7px;color:#000;margin-bottom:1rem;text-shadow:0 1px 2px rgba(255,255,255,.08);}
+  .sidebar .nav-link {color:#000;border-radius:.55rem;font-weight:500;letter-spacing:.4px;transition:background .25s, transform .15s;position:relative;}
+  .sidebar .nav-link:after {content:"";position:absolute;left:50%;bottom:6px;height:2px;width:0;background:#FFD857;border-radius:2px;transform:translateX(-50%);transition:width .35s ease;}
+  .sidebar .nav-link:hover {background:#6B9071;color:#000;transform:translateX(4px);}  
+  .sidebar .nav-link:hover:after, .sidebar .nav-link.active-page:after, .sidebar .nav-link.active:after {width:65%;}
+  .active-page {background:#6B9071!important;color:#000!important;box-shadow:0 0 0 2px rgba(255,255,255,.1) inset;}
+  .card {border:none;border-radius:1rem;box-shadow:0 6px 16px -6px rgba(15,42,29,.25);}
+  .card-header {background:#375534;color:#E3EED4;font-weight:600;}
+  .form-control {background:#AEC3B0;border:1px solid #375534;color:#0F2A1D;}
+  .form-control:focus {box-shadow:0 0 0 .2rem rgba(55,85,52,.25);}
+  .btn-primary {background:#6B9071!important;border-color:#375534!important;color:#E3EED4!important;}
+  .btn-primary:hover {background:#375534!important;}
+  footer {font-size:.8rem;color:#375534;margin-top:2rem;padding:1rem 0;text-align:center;}
+  .avatar-wrapper {display:flex;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;}
+  .avatar-wrapper img {width:110px;height:110px;object-fit:cover;border-radius:50%;border:3px solid #375534;background:#E3EED4;box-shadow:0 4px 10px -4px rgba(15,42,29,.35);}  
+  .avatar-wrapper .avatar-actions {display:flex;flex-direction:column;gap:.35rem;}
+  .avatar-wrapper .small {color:#375534;}
+</style>
+</head>
+<body>
+<script>(function(){try{var p=JSON.parse(localStorage.getItem('uiPreferencesV1')||'{}');if(p.mode==='dark')document.body.classList.add('dark-mode');}catch(e){}})();</script>
+<script>
+  if(!localStorage.getItem('authUser')) {
+    window.location.replace('login.html');
+  }
+</script>
+<nav class="navbar app-navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container-fluid">
+  <a class="navbar-brand" href="index.html"><span class="brand-strong">My</span><span class="brand-accent">Site</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="akun.html">Akun</a></li>
+      </ul>
+      <span class="navbar-text small">Halaman Akun</span>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <aside class="col-12 col-md-3 col-lg-2 sidebar">
+      <h5>Navigasi</h5>
+      <nav class="nav flex-column">
+        <a class="nav-link" href="index.html">Dashboard</a>
+        <a class="nav-link active-page" href="akun.html">Akun</a>
+    <a class="nav-link" href="pengaturan.html">Pengaturan</a>
+  <a class="nav-link" href="logout.html">Keluar</a>
+      </nav>
+    </aside>
+    <main class="col-12 col-md-9 col-lg-10 py-4">
+      <div class="container-fluid">
+        <div class="row g-4">
+          <div class="col-12 col-xl-8">
+            <div class="card h-100">
+              <div class="card-header">Profil Pengguna</div>
+              <div class="card-body">
+                <div class="avatar-wrapper">
+                  <img id="profileAvatar" src="" alt="Foto Profil" />
+                  <div class="avatar-actions small">
+                    <strong>Foto Profil</strong>
+                    <span>Pilih gambar (jpg/png) &lt; 1MB.</span>
+                    <button type="button" id="removePhotoBtn" class="btn btn-sm btn-outline-dark" style="border-color:#375534;color:#0F2A1D;max-width:140px;">Hapus Foto</button>
+                  </div>
+                </div>
+                <form id="profileForm" class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Nama Lengkap</label>
+          <input id="pfName" type="text" class="form-control" placeholder="Nama Anda" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Email</label>
+          <input id="pfEmail" type="email" class="form-control" placeholder="email@example.com" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Kelas</label>
+                    <input type="text" class="form-control" placeholder="XII" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Jurusan</label>
+                    <select class="form-control" required>
+                      <option value="">Pilih...</option>
+                      <option>TKJ</option>
+                      <option>OTKP</option>
+                      <option>MPLB</option>
+                      <option>PM</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Ganti Foto</label>
+                    <input id="pfPhoto" type="file" class="form-control" accept="image/*">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Password</label>
+                    <input id="pfPassword" type="password" class="form-control" placeholder="******" required>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
+                  </div>
+                  <div class="col-12">
+                    <div id="profileAlert" class="small"></div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-xl-4">
+            <div class="card h-100">
+              <div class="card-header">Ringkasan Akun</div>
+              <div class="card-body">
+                <p class="mb-1"><strong>Status:</strong> Aktif</p>
+                <p class="mb-1"><strong>Terakhir Login:</strong> <span id="lastLogin">-</span></p>
+                <p class="mb-3"><strong>Total Data Siswa (Local):</strong> <span id="totalSiswa">0</span></p>
+                <button id="refreshInfo" class="btn btn-primary btn-sm">Refresh Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">Catatan</div>
+              <div class="card-body">
+                <ul class="mb-0 small">
+                  <li>Data disimpan di <em>localStorage</em> browser Anda.</li>
+                  <li>Halaman ini hanya simulasi (tidak terhubung ke server).</li>
+                  <li>Gunakan halaman Dashboard untuk menambah data siswa.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="mt-auto">&copy; 2025 MySite. All rights reserved.</footer>
+    </main>
+  </div>
+</div>
+<script>
+  const STORAGE_KEY = 'studentsDataV1';
+  const USERS_KEY = 'appUsers';
+  const avatarEl = document.getElementById('profileAvatar');
+  const removePhotoBtn = document.getElementById('removePhotoBtn');
+  const photoInput = document.getElementById('pfPhoto');
+  document.getElementById('refreshInfo').addEventListener('click', updateInfo);
+  function updateInfo(){
+    const raw = localStorage.getItem(STORAGE_KEY);
+    const arr = raw? JSON.parse(raw): [];
+    document.getElementById('totalSiswa').textContent = arr.length;
+    document.getElementById('lastLogin').textContent = localStorage.getItem('lastLogin') || '-';
+  }
+  updateInfo();
+  // Simpan waktu akses halaman ini sebagai lastLogin
+  localStorage.setItem('lastLogin', new Date().toLocaleString());
+  const profileForm = document.getElementById('profileForm');
+  // Prefill user data
+  function loadUserProfile(){
+    const authStr = localStorage.getItem('authUser');
+    if(!authStr) return;
+    let authObj; try { authObj = JSON.parse(authStr);} catch(e){ return; }
+    let userRec = null;
+    try {
+      const list = JSON.parse(localStorage.getItem(USERS_KEY))||[];
+      userRec = list.find(u=>u.email===authObj.email) || null;
+    } catch(e){}
+    pfName.value = (userRec&&userRec.name)||authObj.name||'';
+    pfEmail.value = authObj.email||''; // email tidak diedit
+    pfEmail.readOnly = true;
+    pfPassword.value = (userRec&&userRec.password)||'';
+    const photo = userRec && userRec.photo;
+    avatarEl.src = photo ? photo : generatePlaceholder(authObj.name||'User');
+  }
+
+  function generatePlaceholder(name){
+    const initial = (name||'U').trim()[0]?.toUpperCase() || 'U';
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='110' height='110'><rect width='100%' height='100%' rx='55' fill='#AEC3B0'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='28' fill='#375534'>${initial}</text></svg>`;
+    return 'data:image/svg+xml;base64,'+ btoa(svg);
+  }
+
+  loadUserProfile();
+  removePhotoBtn.addEventListener('click', ()=>{
+    try {
+      const users = JSON.parse(localStorage.getItem(USERS_KEY)||'[]');
+      const email = pfEmail.value.trim().toLowerCase();
+      const idx = users.findIndex(u=>u.email===email);
+      if(idx>-1){
+        delete users[idx].photo;
+        localStorage.setItem(USERS_KEY, JSON.stringify(users));
+      }
+    } catch(e){}
+    avatarEl.src = generatePlaceholder(pfName.value);
+    photoInput.value = '';
+  });
+
+  // Preview instan saat pilih foto
+  photoInput.addEventListener('change', ()=>{
+    const file = photoInput.files[0];
+    const alertBox = document.getElementById('profileAlert');
+    if(!file){return;}
+    if(!file.type.startsWith('image/')){
+      alertBox.textContent='File harus gambar.';
+      alertBox.className='text-danger small';
+      photoInput.value='';
+      return;
+    }
+    if(file.size > 1024*1024){
+      alertBox.textContent='Ukuran foto > 1MB.';
+      alertBox.className='text-danger small';
+      photoInput.value='';
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => { avatarEl.src = reader.result; };
+    reader.readAsDataURL(file);
+  });
+  profileForm.addEventListener('submit', e=>{
+    e.preventDefault();
+    const alertBox = document.getElementById('profileAlert');
+    const email = pfEmail.value.trim().toLowerCase();
+    const file = document.getElementById('pfPhoto').files[0];
+    const applySave = (photoData)=>{
+      try {
+        const users = JSON.parse(localStorage.getItem(USERS_KEY))||[];
+        const idx = users.findIndex(u=>u.email===email);
+        if(idx>-1){
+          users[idx].name = pfName.value.trim();
+          users[idx].password = pfPassword.value;
+          if(photoData!==undefined) users[idx].photo = photoData;
+          localStorage.setItem(USERS_KEY, JSON.stringify(users));
+          const au = JSON.parse(localStorage.getItem('authUser')||'{}');
+          au.name = pfName.value.trim();
+          localStorage.setItem('authUser', JSON.stringify(au));
+        }
+        if(photoData) avatarEl.src = photoData;
+      } catch(e){}
+      alertBox.textContent='Perubahan tersimpan.';
+      alertBox.className='text-success small';
+    };
+    if(file){
+      if(file.size > 1024*1024){
+        alertBox.textContent='Ukuran foto > 1MB.';
+        alertBox.className='text-danger small';
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => applySave(reader.result);
+      reader.readAsDataURL(file);
+    } else {
+      applySave();
+    }
+  });
+</script>
+</body>
+</html>

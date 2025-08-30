@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Pengaturan</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+body {background:#E3EED4;color:#000;font-family:'Inter',sans-serif;}
+.navbar {background:#0F2A1D !important;}
+/* Navbar unik */
+.app-navbar {background:linear-gradient(135deg,#0F2A1D 0%,#2e6a46 55%,#0F2A1D 100%) !important;box-shadow:0 4px 12px -4px rgba(0,0,0,.45);position:relative;}
+.app-navbar:after {content:'';position:absolute;left:0;bottom:0;width:100%;height:3px;background:linear-gradient(90deg,#FFD857,#6B9071,#FFD857);opacity:.85;}
+.app-navbar .navbar-brand {font-weight:700;letter-spacing:1px;display:flex;align-items:center;gap:.35rem;}
+.navbar-brand .brand-strong {color:#FFD857;}
+.navbar-brand .brand-accent {color:#E3EED4;}
+.app-navbar .nav-link {position:relative;padding:.55rem .9rem;border-radius:.75rem;transition:color .25s, background .25s;}
+.app-navbar .nav-link:after {content:'';position:absolute;left:50%;bottom:4px;width:0;height:2px;background:#FFD857;transition:width .3s;transform:translateX(-50%);} 
+.app-navbar .nav-link:hover:after, .app-navbar .nav-link.active:after {width:55%;}
+.app-navbar .nav-link.active, .app-navbar .nav-link:focus {background:rgba(255,216,87,.08);}
+.app-navbar .navbar-toggler {border-color:rgba(255,216,87,.6);} 
+.app-navbar .navbar-toggler:focus {box-shadow:0 0 0 .15rem rgba(255,216,87,.35);} 
+body.dark-mode .app-navbar {background:linear-gradient(135deg,#091911 0%,#153324 55%,#091911 100%) !important;}
+body.dark-mode .app-navbar:after {background:linear-gradient(90deg,#6fbf92,#FFD857,#6fbf92);} 
+body.dark-mode .navbar-brand .brand-strong {color:#6fbf92;} 
+body.dark-mode .navbar-brand .brand-accent {color:#fff;} 
+.navbar-brand,.navbar-nav .nav-link {color:#E3EED4 !important;}
+.sidebar {background:linear-gradient(180deg,#375534 0%,#0F2A1D 100%);color:#000;}
+.sidebar .nav-link {color:#000 !important; position:relative;}
+.sidebar .nav-link:after {content:"";position:absolute;left:50%;bottom:6px;height:2px;width:0;background:#FFD857;border-radius:2px;transform:translateX(-50%);transition:width .35s ease;}
+.sidebar .nav-link:hover:after, .sidebar .nav-link.active-page:after {width:65%;}
+.sidebar .nav-link.active-page {background:#6B9071 !important;}
+.toggle-wrapper {display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;border:1px solid #375534;border-radius:.75rem;background:#AEC3B0;margin-bottom:1rem;}
+.dark-mode body,.dark-mode main {background:#0F2A1D !important;color:#fff !important;}
+.dark-mode .card {background:#102f20;color:#E3EED4;border-color:#34543a;}
+.dark-mode .form-control {background:#203b2b;color:#E3EED4;border-color:#34543a;}
+.dark-mode .navbar {background:#091911 !important;}
+.dark-mode .sidebar {background:linear-gradient(180deg,#152a20 0%,#091911 100%);}
+.dark-mode .sidebar .nav-link {color:#E3EED4 !important;}
+.dark-mode .nav-link.active-page {background:#264c38 !important;}
+ .dark-mode .sidebar .nav-link:after {background:#FFD857;}
+.theme-preview {display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:.75rem;}
+.theme-swatch {position:relative;border:2px solid transparent;border-radius:.75rem;overflow:hidden;cursor:pointer;min-height:80px;display:flex;align-items:flex-end;padding:.4rem;font-size:.65rem;font-weight:600;letter-spacing:.4px;text-transform:uppercase;color:#fff;}
+.theme-swatch span {mix-blend-mode:luminosity;}
+.theme-swatch.primary {background:linear-gradient(135deg,#0F2A1D,#375534);} 
+.theme-swatch.dark {background:linear-gradient(135deg,#091911,#264c38);} 
+.theme-swatch.active {border-color:#FFD857;box-shadow:0 0 0 3px rgba(255,216,87,.4);} 
+.mode-label {font-weight:600;font-family:'Poppins',sans-serif;letter-spacing:.5px;}
+small.hint {opacity:.8;}
+</style>
+</head>
+<body>
+<script>
+// Auth guard
+if(!localStorage.getItem('authUser')) {window.location.replace('login.html');}
+</script>
+<nav class="navbar app-navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container-fluid">
+  <a class="navbar-brand" href="index.html"><span class="brand-strong">My</span><span class="brand-accent">Site</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link" href="akun.html">Akun</a></li>
+        <li class="nav-item"><a class="nav-link active" href="pengaturan.html">Pengaturan</a></li>
+      </ul>
+      <div class="d-flex gap-2">
+        <a class="btn btn-sm btn-outline-light" href="logout.html">Keluar</a>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <aside class="sidebar col-12 col-md-3 col-lg-2 min-vh-100 p-3">
+      <h5 class="ps-2 mb-3">Navigasi</h5>
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link" href="index.html">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="akun.html">Akun</a></li>
+        <li class="nav-item"><a class="nav-link active-page" href="pengaturan.html">Pengaturan</a></li>
+        <li class="nav-item"><a class="nav-link" href="logout.html">Keluar</a></li>
+      </ul>
+    </aside>
+    <main class="col-12 col-md-9 col-lg-10 py-3">
+      <div class="container">
+        <h3 class="mb-3" style="font-family:'Poppins',sans-serif;font-weight:600;">Pengaturan Tampilan</h3>
+        <div class="row g-3 mb-3">
+          <div class="col-lg-6">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="mode-label">Mode Gelap</span>
+                  <div class="form-check form-switch m-0">
+                    <input class="form-check-input" type="checkbox" id="darkModeSwitch">
+                  </div>
+                </div>
+                <small class="hint d-block mb-3">Aktifkan untuk tampilan gelap yang nyaman di malam hari.</small>
+                <div class="theme-preview mb-2">
+                  <div class="theme-swatch primary active" data-theme="light"><span>Light</span></div>
+                  <div class="theme-swatch dark" data-theme="dark"><span>Dark</span></div>
+                </div>
+                <small class="hint">Pilih tema dasar lalu nyalakan switch untuk mengunci preferensi.</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card h-100">
+              <div class="card-body">
+                <h6 class="fw-semibold mb-2">Preferensi Disimpan</h6>
+                <ul class="small mb-0" id="prefList"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script>
+const PREF_KEY = 'uiPreferencesV1';
+function loadPref(){try{return JSON.parse(localStorage.getItem(PREF_KEY)||'{}')}catch(e){return {}}}
+function savePref(p){localStorage.setItem(PREF_KEY,JSON.stringify(p));}
+function applyTheme(pref){
+  const root=document.documentElement;
+  if(pref.mode==='dark'){
+    document.body.classList.add('dark-mode');
+  }else{
+    document.body.classList.remove('dark-mode');
+  }
+}
+function renderPrefList(pref){
+  const ul=document.getElementById('prefList');
+  const items=[`Mode: ${pref.mode||'light'}`];
+  ul.innerHTML=items.map(i=>`<li>${i}</li>`).join('');
+}
+const pref=loadPref();
+applyTheme(pref);
+renderPrefList(pref);
+// Init switch
+const darkSwitch=document.getElementById('darkModeSwitch');
+darkSwitch.checked = pref.mode==='dark';
+
+darkSwitch.addEventListener('change',()=>{
+  const current=loadPref();
+  current.mode=darkSwitch.checked?'dark':'light';
+  savePref(current);
+  applyTheme(current);
+  renderPrefList(current);
+});
+// Theme swatch click
+for(const sw of document.querySelectorAll('.theme-swatch')){
+  sw.addEventListener('click',()=>{
+    document.querySelectorAll('.theme-swatch').forEach(s=>s.classList.remove('active'));
+    sw.classList.add('active');
+    if(sw.dataset.theme==='dark'){
+      darkSwitch.checked=true;darkSwitch.dispatchEvent(new Event('change'));
+    } else {
+      darkSwitch.checked=false;darkSwitch.dispatchEvent(new Event('change'));
+    }
+  });
+}
+</script>
+</body>
+</html>

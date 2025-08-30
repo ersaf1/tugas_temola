@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Register - MySite</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  body {min-height:100vh;display:flex;align-items:center;justify-content:center;background:#E3EED4;font-family:'Inter',sans-serif;color:#000;}
+  body.dark-mode {background:#0F2A1D;color:#fff;}
+  .auth-card {width:100%;max-width:430px;background:#AEC3B0;border-radius:1rem;padding:2rem;box-shadow:0 8px 24px -8px rgba(15,42,29,.3);}
+  body.dark-mode .auth-card {background:#152a20;box-shadow:0 8px 24px -10px rgba(0,0,0,.55);} 
+  h1 {font-family:'Poppins',sans-serif;font-size:1.55rem;font-weight:600;text-align:center;margin-bottom:1.4rem;color:#000;}
+  body.dark-mode h1 {color:#fff;}
+  .form-control {background:#E3EED4;border:1px solid #375534;color:#0F2A1D;}
+  body.dark-mode .form-control {background:#203b2b;border-color:#34543a;color:#E3EED4;}
+  .form-control:focus {box-shadow:0 0 0 .15rem rgba(55,85,52,.35);}  
+  .btn-primary {background:#6B9071!important;border-color:#375534!important;color:#E3EED4!important;font-weight:600;}
+  body.dark-mode .btn-primary {background:#264c38!important;border-color:#34543a!important;}
+  .btn-primary:hover {background:#375534!important;}
+  body.dark-mode .btn-primary:hover {background:#3a6a4d!important;}
+  a {color:#375534;font-weight:500;text-decoration:none;}
+  body.dark-mode a {color:#6fbf92;}
+  a:hover {text-decoration:underline;}
+  .small-text {font-size:.8rem;color:#375534;margin-top:1rem;text-align:center;}
+  body.dark-mode .small-text {color:#6fbf92;}
+  .app-navbar {background:linear-gradient(135deg,#0F2A1D 0%,#2e6a46 55%,#0F2A1D 100%) !important;box-shadow:0 4px 12px -4px rgba(0,0,0,.45);} 
+  .app-navbar .navbar-brand {font-weight:700;letter-spacing:1px;}
+  .navbar-brand .brand-strong {color:#FFD857;}
+  .navbar-brand .brand-accent {color:#E3EED4;}
+  body.dark-mode .app-navbar {background:linear-gradient(135deg,#091911 0%,#153324 55%,#091911 100%) !important;}
+  body.dark-mode .navbar-brand .brand-strong {color:#6fbf92;}
+</style>
+</head>
+<body>
+<nav class="navbar app-navbar navbar-dark navbar-expand-lg w-100 position-absolute top-0 start-0" style="min-height:56px;">
+  <div class="container-fluid">
+    <a class="navbar-brand ms-2" href="index.html"><span class="brand-strong">My</span><span class="brand-accent">Site</span></a>
+  </div>
+</nav>
+<div style="height:56px;"></div>
+<script>(function(){try{var p=JSON.parse(localStorage.getItem('uiPreferencesV1')||'{}');if(p.mode==='dark')document.body.classList.add('dark-mode');}catch(e){}})();</script>
+  <div class="auth-card">
+    <h1>Daftar</h1>
+    <form id="registerForm" class="mb-3">
+      <div class="mb-3">
+        <label class="form-label">Nama</label>
+        <input type="text" class="form-control" id="regName" required placeholder="Nama lengkap"/>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" id="regEmail" required placeholder="email@example.com"/>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" id="regPassword" required placeholder="Minimal 4 karakter" minlength="4"/>
+      </div>
+      <button class="btn btn-primary w-100" type="submit">Buat Akun</button>
+      <div id="registerAlert" class="small mt-2"></div>
+    </form>
+    <div class="text-center">
+      <span class="small">Sudah punya akun? <a href="login.html">Login</a></span>
+    </div>
+    <p class="small-text">Data akun disimpan lokal di browser Anda.</p>
+  </div>
+<script>
+  const USERS_KEY='appUsers';
+  function getUsers(){try{return JSON.parse(localStorage.getItem(USERS_KEY))||[]}catch(e){return []}}
+  function setUsers(u){localStorage.setItem(USERS_KEY, JSON.stringify(u))}
+  document.getElementById('registerForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    const name=regName.value.trim();
+    const email=regEmail.value.trim().toLowerCase();
+    const password=regPassword.value;
+    const alertBox=document.getElementById('registerAlert');
+    if(!name||!email||!password){
+      alertBox.textContent='Semua field wajib diisi.';
+      alertBox.className='small text-danger';return;
+    }
+    const users=getUsers();
+    if(users.find(u=>u.email===email)){
+      alertBox.textContent='Email sudah terdaftar.';
+      alertBox.className='small text-danger';return;
+    }
+    users.push({name,email,password,createdAt:Date.now()});
+    setUsers(users);
+    alertBox.textContent='Registrasi berhasil. Mengalihkan ke login...';
+    alertBox.className='small text-success';
+    setTimeout(()=>location.replace('login.html'),900);
+  });
+  if(localStorage.getItem('authUser')) location.replace('index.html');
+</script>
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Layout Project</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      body {
+        background: #E3EED4;
+        color: #000; /* teks hitam saat mode terang */
+      }
+  /* Dark mode dasar */
+  body.dark-mode {background:#0F2A1D !important;color:#fff !important;} /* teks putih saat mode gelap */
+  body.dark-mode .navbar {background:#091911 !important;}
+  body.dark-mode .navbar-brand, body.dark-mode .navbar-nav .nav-link {color:#E3EED4 !important;}
+  body.dark-mode aside.sidebar {background:linear-gradient(180deg,#152a20 0%,#091911 100%) !important;color:#E3EED4 !important;}
+  body.dark-mode .sidebar h5, body.dark-mode .sidebar .nav-link {color:#E3EED4 !important;}
+  body.dark-mode .sidebar .nav-link.active-page {background:#264c38 !important;}
+  body.dark-mode .sidebar .nav-link:after {background:#FFD857;}
+  body.dark-mode .table {background:#152a20;color:#E3EED4;}
+  body.dark-mode .table-secondary {background:#264c38 !important;color:#E3EED4 !important;}
+  body.dark-mode .form-control {background:#203b2b;color:#E3EED4;border-color:#34543a;}
+  body.dark-mode .btn-success, body.dark-mode .btn-primary {background:#264c38 !important;border-color:#3a6a4d !important;color:#E3EED4 !important;}
+  body.dark-mode .breadcrumb-buttons .crumb-btn {background:#091911;color:#E3EED4;border-color:#264c38;}
+  body.dark-mode .breadcrumb-buttons .crumb-btn.active {background:#264c38;color:#E3EED4;box-shadow:0 0 0 2px #091911 inset,0 3px 6px -2px rgba(0,0,0,.4);}      
+  body.dark-mode .carousel-caption.no-bg h5, body.dark-mode .carousel-caption.no-bg p {color:#fff !important;text-shadow:0 2px 4px rgba(0,0,0,.75);} 
+      .navbar {
+        background-color: #0F2A1D !important; /* fallback */
+      }
+      /* Navbar kustom unik */
+      .app-navbar {background:linear-gradient(135deg,#0F2A1D 0%,#2e6a46 55%,#0F2A1D 100%) !important;box-shadow:0 4px 12px -4px rgba(0,0,0,.45);position:relative;}
+      .app-navbar:after {content:'';position:absolute;left:0;bottom:0;width:100%;height:3px;background:linear-gradient(90deg,#FFD857,#6B9071,#FFD857);opacity:.85;}
+      .app-navbar .navbar-brand {font-weight:700;letter-spacing:1px;display:flex;align-items:center;gap:.35rem;}
+      .navbar-brand .brand-strong {color:#FFD857;}
+      .navbar-brand .brand-accent {color:#E3EED4;}
+      .app-navbar .nav-link {position:relative;padding:.55rem .9rem;border-radius:.75rem;transition:color .25s, background .25s;}
+      .app-navbar .nav-link:after {content:'';position:absolute;left:50%;bottom:4px;width:0;height:2px;background:#FFD857;transition:width .3s;transform:translateX(-50%);} 
+      .app-navbar .nav-link:hover:after, .app-navbar .nav-link.active:after {width:55%;}
+      .app-navbar .nav-link.active, .app-navbar .nav-link:focus {background:rgba(255,216,87,.08);}
+      .app-navbar .navbar-toggler {border-color:rgba(255,216,87,.6);} 
+      .app-navbar .navbar-toggler:focus {box-shadow:0 0 0 .15rem rgba(255,216,87,.35);} 
+      body.dark-mode .app-navbar {background:linear-gradient(135deg,#091911 0%,#153324 55%,#091911 100%) !important;}
+      body.dark-mode .app-navbar:after {background:linear-gradient(90deg,#6fbf92,#FFD857,#6fbf92);} 
+      body.dark-mode .navbar-brand .brand-strong {color:#6fbf92;} 
+      body.dark-mode .navbar-brand .brand-accent {color:#fff;} 
+      .navbar-brand, .navbar-nav .nav-link, .navbar-nav .nav-link.active {
+        color: #E3EED4 !important;
+      }
+      .navbar-brand {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .6px;
+      }
+      .navbar-nav .nav-link {
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        letter-spacing: .4px;
+      }
+      .navbar-nav .nav-link.disabled {
+        color: #AEC3B0 !important;
+      }
+      .dropdown-menu {
+        background-color: #375534;
+      }
+      .dropdown-item {
+        color: #E3EED4;
+      }
+      .dropdown-item:hover {
+        background-color: #6B9071;
+        color: #0F2A1D;
+      }
+      aside {
+        background: #AEC3B0 !important;
+        color: #0F2A1D !important;
+      }
+      aside h5 {
+        color: #0F2A1D !important;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .7px;
+      }
+      aside .nav-link {
+        color: #0F2A1D !important;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        letter-spacing: .45px;
+        border-radius: .5rem;
+        transition: background .25s, transform .15s;
+      }
+      aside .nav-link:hover {
+        transform: translateX(4px);
+      }
+      aside .nav-link:hover {
+        background: #6B9071;
+        color: #E3EED4 !important;
+      }
+      main {
+        background: #E3EED4;
+        color: #0F2A1D;
+      }
+      .table {
+        background: #E3EED4;
+        color: #0F2A1D;
+      }
+      .table-secondary {
+        background: #375534 !important;
+        color: #E3EED4 !important;
+      }
+      .btn-success, .btn-primary {
+        background-color: #6B9071 !important;
+        border-color: #375534 !important;
+        color: #E3EED4 !important;
+      }
+      .btn-success:hover, .btn-primary:hover {
+        background-color: #375534 !important;
+        color: #E3EED4 !important;
+      }
+      .form-control {
+        background: #AEC3B0;
+        color: #0F2A1D;
+        border: 1px solid #375534;
+      }
+  /* Warna putih untuk input search di navbar */
+  .navbar .form-control { color:#fff !important; }
+  .navbar .form-control::placeholder { color:#fff !important; opacity:.85; }
+      .form-label {
+        color: #375534;
+      }
+      .breadcrumb {
+        background: #6B9071;
+      }
+      .breadcrumb-item a, .breadcrumb-item.active {
+        color: #0F2A1D !important;
+      }
+      /* Hilangkan separator '/' breadcrumb */
+      .breadcrumb-item + .breadcrumb-item::before {
+        content: '' !important;
+        padding: 0;
+      }
+      /* Breadcrumb items styled like static buttons */
+      .breadcrumb .fake-btn {
+        display:inline-block;
+        padding: .35rem .85rem;
+        border-radius: .6rem;
+        background:#0F2A1D;
+        color:#E3EED4 !important;
+        font-size:.85rem;
+        font-weight:600;
+        letter-spacing:.5px;
+        text-decoration:none;
+        cursor:default;
+        user-select:none;
+      }
+      .breadcrumb .fake-btn.current {
+        background:#375534;
+        color:#E3EED4 !important;
+        box-shadow:0 0 0 2px #0F2A1D inset;
+      }
+      .breadcrumb .fake-btn:not(.current):hover {
+        /* no hover effect to emphasize non-clickable */
+        background:#0F2A1D;
+      }
+  /* Tombol breadcrumb gaya baru */
+  .breadcrumb-buttons {display:flex;justify-content:flex-start;gap:.4rem;padding:.45rem .75rem;margin:.15rem 0 .55rem;width:100%;}
+  .breadcrumb-buttons .crumb-btn {background:#0F2A1D;color:#E3EED4;border:1px solid #375534;padding:.55rem 1.1rem;border-radius:.7rem;font-size:.8rem;font-weight:600;letter-spacing:.45px;cursor:pointer;box-shadow:0 2px 4px rgba(15,42,29,.35);transition:background .25s, transform .2s, box-shadow .25s;user-select:none;}
+  .breadcrumb-buttons .crumb-btn:hover {background:#375534;transform:translateY(-2px);}
+  .breadcrumb-buttons .crumb-btn.active {background:#6B9071;color:#0F2A1D;box-shadow:0 0 0 2px #0F2A1D inset,0 3px 6px -2px rgba(15,42,29,.4);}
+  @media (max-width:576px){.breadcrumb-buttons {flex-wrap:wrap;}}
+      .carousel-caption {
+        background: rgba(15,42,29,0.7);
+        border-radius: 12px;
+      }
+      /* Caption tanpa background khusus untuk slide pertama */
+      .carousel-caption.no-bg {background:none !important; box-shadow:none;}
+      .carousel-caption.no-bg h5,
+      .carousel-caption.no-bg p {color:#000 !important; text-shadow:0 1px 2px rgba(255,255,255,.6);} 
+  /* Full height layout */
+  html, body {height:100%;}
+  .full-height-row {min-height:100vh; align-items:stretch;}
+  .full-height-row aside, .full-height-row main {display:flex; flex-direction:column;}
+  .full-height-row main {padding-bottom:2rem;}
+  /* Carousel sizing adjust */
+  .hero-carousel-wrapper {width:100%;margin:1rem 0 .75rem;border-radius:0;overflow:hidden;box-shadow:0 6px 18px -8px rgba(15,42,29,.35);} 
+  .hero-carousel-wrapper .carousel-item img {height:clamp(480px,82vh,820px);object-fit:cover;width:100%;} 
+  @media (max-width: 768px){
+    .hero-carousel-wrapper .carousel-item img {height:60vh;min-height:300px;}
+  }
+  /* Unified sidebar theme */
+  .sidebar {background:linear-gradient(180deg,#375534 0%,#0F2A1D 100%);color:#000 !important;}
+  .sidebar h5 {color:#000 !important; text-shadow:0 1px 2px rgba(255,255,255,.08);}
+  .sidebar .nav-link {color:#000 !important; border-radius:.55rem; font-weight:500; letter-spacing:.4px; transition:background .25s, transform .15s; position:relative;}
+  .sidebar .nav-link:after {content:"";position:absolute;left:50%;bottom:6px;height:2px;width:0;background:#FFD857;border-radius:2px;transform:translateX(-50%);transition:width .35s ease;}
+  .sidebar .nav-link:hover {background:#6B9071 !important; color:#000 !important; transform:translateX(4px);} 
+  .sidebar .nav-link:hover:after, .sidebar .nav-link.active-page:after, .sidebar .nav-link.active:after {width:65%;}
+  .sidebar .nav-link.active-page, .sidebar .nav-link.active {background:#6B9071 !important; color:#000 !important; box-shadow:0 0 0 2px rgba(255,255,255,.1) inset;}
+    </style>
+</head>
+<body class="bg-light">
+<script>/* Apply saved dark mode early */(function(){try{var p=JSON.parse(localStorage.getItem('uiPreferencesV1')||'{}');if(p.mode==='dark'){document.body.classList.add('dark-mode');}}catch(e){}})();</script>
+<script>
+  // Auth guard: jika belum login arahkan ke login.html
+  if(!localStorage.getItem('authUser')) {
+    window.location.replace('login.html');
+  }
+</script>
+<!-- Navbar -->
+<nav class="navbar app-navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container-fluid">
+  <a class="navbar-brand" href="index.html"><span class="brand-strong">My</span><span class="brand-accent">Site</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Beranda</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Tentang</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Menu Lain
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Profil</a></li>
+            <li><a class="dropdown-item" href="#">Kontak</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Lainnya</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+  <input class="form-control me-2" type="search" placeholder="Cari sesuatu..." aria-label="Search"/>
+  <button class="btn btn-outline-success" type="submit">Cari</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<!-- Carousel -->    
+<div class="hero-carousel-wrapper">
+<div id="heroStatic" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="images/carousel1.jpg" data-fallback="https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=1600&q=60" class="d-block w-100 img-fluid" alt="Gambar utama statis">
+      <div class="carousel-caption d-none d-md-block text-center no-bg">
+  <h5>Selamat Datang di Website Saya</h5>
+  <p></p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Breadcrumb sebagai tombol -->
+<div class="breadcrumb-buttons px-3">
+  <span class="crumb-btn">Beranda</span>
+  <span class="crumb-btn">Artikel</span>
+  <span class="crumb-btn active">Tentang Kami</span>
+</div>
+
+
+<!-- Sidebar grid -->
+<div class="container-fluid">
+  <div class="row full-height-row">
+    <!-- Sidebar -->
+<aside class="sidebar col-12 col-md-3 col-lg-2 min-vh-75 p-2">
+  <h5 class="ps-2 mb-3">Navigasi</h5>
+  <ul class="nav flex-column">
+    <li class="nav-item"><a class="nav-link active-page" href="index.html">Dashboard</a></li>
+    <li class="nav-item"><a class="nav-link" href="akun.html">Akun</a></li>
+  <li class="nav-item"><a class="nav-link" href="pengaturan.html">Pengaturan</a></li>
+    <li class="nav-item"><a class="nav-link" href="logout.html">Keluar</a></li>
+  </ul>
+</aside>
+
+    <!-- Biar kekanan -->
+<main class="col-12 col-md-9 col-lg-10 pt-2">
+      <!-- Tabel 5 kolom 10 baris -->
+  <div class="table-responsive mb-2">
+        <table class="table table-bordered table-striped align-middle mb-0" id="dataTable">
+          <thead class="table-secondary">
+            <tr>
+              <th>No</th><th>Nama</th><th>Kelas</th><th>Jurusan</th><th>Nilai</th>
+            </tr>
+          </thead>
+          <tbody id="dataTableBody">
+            <tr><td>1</td><td>Budi</td><td>XII</td><td>TKJ</td><td>90</td></tr>
+            <tr><td>2</td><td>Siti</td><td>XII</td><td>TKJ</td><td>85</td></tr>
+            <tr><td>3</td><td>Rian</td><td>XII</td><td>TKJ</td><td>92</td></tr>
+            <tr><td>4</td><td>Dewi</td><td>XII</td><td>TKJ</td><td>87</td></tr>
+            <tr><td>5</td><td>Fajar</td><td>XII</td><td>TKJ</td><td>89</td></tr>
+            <tr><td>6</td><td>Lina</td><td>XII</td><td>TKJ</td><td>91</td></tr>
+            <tr><td>7</td><td>Andi</td><td>XII</td><td>TKJ</td><td>88</td></tr>
+            <tr><td>8</td><td>Rosa</td><td>XII</td><td>TKJ</td><td>93</td></tr>
+            <tr><td>9</td><td>Yoga</td><td>XII</td><td>TKJ</td><td>86</td></tr>
+            <tr><td>10</td><td>Vina</td><td>XII</td><td>TKJ</td><td>94</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Form input -->
+  <form class="row gy-2 gx-3" id="studentForm" autocomplete="off" style="margin-top:.4rem;">
+        <div class="col-md-6">
+          <label class="form-label" for="namaInput">Nama Lengkap</label>
+          <input id="namaInput" name="nama" type="text" class="form-control" placeholder="Masukkan nama lengkap" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label" for="kelasInput">Kelas</label>
+          <input id="kelasInput" name="kelas" type="text" class="form-control" placeholder="XII" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label" for="jurusanInput">Jurusan</label>
+          <input id="jurusanInput" name="jurusan" type="text" class="form-control" placeholder="TKJ" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label" for="nilaiInput">Nilai</label>
+          <input id="nilaiInput" name="nilai" type="number" class="form-control" placeholder="0-100" min="0" max="100" required>
+        </div>
+        <div class="col-md-5">
+          <label class="form-label" for="fotoInput">Upload Foto (opsional)</label>
+          <input id="fotoInput" name="foto" class="form-control" type="file" accept="image/*">
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="1" id="rememberCheck" checked>
+            <label class="form-check-label" for="rememberCheck">Simpan di browser</label>
+          </div>
+        </div>
+        <div class="col-12">
+          <div id="formAlert" class="small"></div>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-success">Tambah Data</button>
+          <button type="button" id="resetStorageBtn" class="btn btn-primary ms-2">Reset Tersimpan</button>
+          <!-- Tombol generate dihapus sesuai permintaan -->
+        </div>
+      </form>
+    </main>
+  </div>
+</div>
+<!-- ...Muflih rafileseppa... -->
+</body>
+<script>
+// Penyimpanan data siswa di localStorage (key)
+const STORAGE_KEY = 'studentsDataV1';
+
+function loadData() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    console.error('Parse error', e);
+    return [];
+  }
+}
+
+function saveData(arr) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+}
+
+function renderTable() {
+  const tbody = document.getElementById('dataTableBody');
+  const data = loadData();
+  tbody.innerHTML = data.map((d,i)=>`<tr><td>${i+1}</td><td>${d.nama}</td><td>${d.kelas}</td><td>${d.jurusan}</td><td>${d.nilai}</td></tr>`).join('');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Jika sudah ada data awal hardcoded, gabungkan hanya sekali (optional)
+  if(!localStorage.getItem(STORAGE_KEY)) {
+    const seed = [];
+    saveData(seed);
+  }
+  renderTable();
+
+  const form = document.getElementById('studentForm');
+  const alertBox = document.getElementById('formAlert');
+  const resetBtn = document.getElementById('resetStorageBtn');
+  // generateBtn dihapus
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nama = document.getElementById('namaInput').value.trim();
+    const kelas = document.getElementById('kelasInput').value.trim();
+    const jurusan = document.getElementById('jurusanInput').value.trim();
+    const nilai = document.getElementById('nilaiInput').value.trim();
+    if(!nama || !kelas || !jurusan || nilai === '') {
+      alertBox.textContent = 'Semua field wajib diisi.';
+      alertBox.className = 'text-danger small';
+      return;
+    }
+    const nVal = Number(nilai);
+    if(isNaN(nVal) || nVal < 0 || nVal > 100) {
+      alertBox.textContent = 'Nilai harus 0-100.';
+      alertBox.className = 'text-danger small';
+      return;
+    }
+    const data = loadData();
+    data.push({nama, kelas, jurusan, nilai: nVal});
+    if(document.getElementById('rememberCheck').checked) {
+      saveData(data);
+    }
+    renderTable();
+    form.reset();
+    alertBox.textContent = 'Data ditambahkan.';
+    alertBox.className = 'text-success small';
+  });
+
+  resetBtn.addEventListener('click', () => {
+    if(confirm('Hapus semua data tersimpan?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      renderTable();
+      alertBox.textContent = 'Data tersimpan dihapus.';
+      alertBox.className = 'text-warning small';
+    }
+  });
+
+  // Event generate dihapus
+  // Fallback gambar carousel jika file lokal tidak ditemukan
+  document.querySelectorAll('.hero-carousel-wrapper img[data-fallback]').forEach(img => {
+    if(!img.complete) {
+      img.addEventListener('error', () => {
+        if(img.getAttribute('data-fallback')) img.src = img.getAttribute('data-fallback');
+      });
+    }
+    // Jika sudah error sebelum listener dipasang
+    if(img.naturalWidth === 0) {
+      const fb = img.getAttribute('data-fallback');
+      if(fb) img.src = fb;
+    }
+  });
+});
+</script>
+</html>
